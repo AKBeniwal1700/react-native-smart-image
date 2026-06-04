@@ -63,15 +63,23 @@ export const useAnimation = (
       case "fold-out":
         return {
           opacity,
+          // @ts-ignore - transformOrigin is supported in RN 0.73+ but might be missing in some older TS types
+          transformOrigin: ["0%", "0%"],
           transform: [
             {
               perspective: 1000,
             },
             {
-              rotateX: withTiming(loaded ? "0deg" : "-90deg", { duration }),
+              rotateX: withTiming(loaded ? "0deg" : "30deg", { duration }),
             },
             {
-              scale: withTiming(loaded ? 1 : 0.8, { duration }),
+              rotateY: withTiming(loaded ? "0deg" : "-30deg", { duration }),
+            },
+            {
+              rotate: withTiming(loaded ? "0deg" : "-15deg", { duration }),
+            },
+            {
+              scale: withTiming(loaded ? 1 : 0.9, { duration }),
             },
           ],
         };
