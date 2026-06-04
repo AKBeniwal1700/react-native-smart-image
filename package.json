@@ -1,6 +1,6 @@
 {
   "name": "@akbeniwal/react-native-smart-image",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "A powerful React Native image component with skeleton loading and reveal animations.",
   "main": "dist/index.js",
   "module": "dist/index.js",

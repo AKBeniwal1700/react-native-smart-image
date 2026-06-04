@@ -50,6 +50,7 @@ The following reveal animations are supported out-of-the-box:
 - `slide-left`
 - `slide-right`
 - `zoom-out`
+- `zoom-in`
 - `fold-out`
 
 ---
@@ -102,6 +103,17 @@ const App = () => {
 />
 ```
 
+#### Zoom In Animation
+
+```tsx
+<SmartImage
+  source={{ uri: "https://picsum.photos/500" }}
+  animation="zoom-in"
+  animationDuration={700}
+  style={{ width: 200, height: 200 }}
+/>
+```
+
 #### Fold Out Animation
 
 ```tsx
@@ -122,7 +134,7 @@ const App = () => {
 | :---------------------- | :---------------------- | :------- | :---------- | :----------------------------------------------------------------------------------------------------------------- |
 | **`source`**            | `ImageSourcePropType`   | **Yes**  | -           | The image source (e.g. URI or local resource).                                                                     |
 | **`style`**             | `StyleProp<ImageStyle>` | No       | -           | Style object applied to both the image and the skeleton wrapper.                                                   |
-| **`animation`**         | `AnimationType`         | No       | `"fade"`    | The reveal animation type (`fade`, `slide-up`, `slide-down`, `slide-left`, `slide-right`, `zoom-out`, `fold-out`). |
+| **`animation`**         | `AnimationType`         | No       | `"fade"`    | The reveal animation type (`fade`, `slide-up`, `slide-down`, `slide-left`, `slide-right`, `zoom-out`, `zoom-in`, `fold-out`). |
 | **`animationDuration`** | `number`                | No       | `400`       | Duration of the transition animation in milliseconds.                                                              |
 | **`skeletonColor`**     | `string`                | No       | `"#E5E5E5"` | The background color of the skeleton placeholder block.                                                            |
 
