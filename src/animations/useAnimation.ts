@@ -1,13 +1,14 @@
-import { useAnimatedStyle, withTiming } from "react-native-reanimated";
+import { SharedValue, useAnimatedStyle, withTiming } from "react-native-reanimated";
 import { AnimationType } from "../types";
 
 export const useAnimation = (
   animation: AnimationType,
-  loaded: boolean,
+  loaded: SharedValue<boolean>,
   duration: number
 ) => {
   return useAnimatedStyle(() => {
-    const opacity = withTiming(loaded ? 1 : 0, { duration });
+    const isLoaded = loaded.value;
+    const opacity = withTiming(isLoaded ? 1 : 0, { duration: 200 });
 
     switch (animation) {
       case "slide-up":
@@ -15,7 +16,7 @@ export const useAnimation = (
           opacity,
           transform: [
             {
-              translateY: withTiming(loaded ? 0 : 30, { duration }),
+              translateY: withTiming(isLoaded ? 0 : 30, { duration }),
             },
           ],
         };
@@ -25,7 +26,7 @@ export const useAnimation = (
           opacity,
           transform: [
             {
-              translateY: withTiming(loaded ? 0 : -30, { duration }),
+              translateY: withTiming(isLoaded ? 0 : -30, { duration }),
             },
           ],
         };
@@ -35,7 +36,7 @@ export const useAnimation = (
           opacity,
           transform: [
             {
-              translateX: withTiming(loaded ? 0 : -30, { duration }),
+              translateX: withTiming(isLoaded ? 0 : -30, { duration }),
             },
           ],
         };
@@ -45,7 +46,7 @@ export const useAnimation = (
           opacity,
           transform: [
             {
-              translateX: withTiming(loaded ? 0 : 30, { duration }),
+              translateX: withTiming(isLoaded ? 0 : 30, { duration }),
             },
           ],
         };
@@ -55,7 +56,17 @@ export const useAnimation = (
           opacity,
           transform: [
             {
-              scale: withTiming(loaded ? 1 : 1.3, { duration }),
+              scale: withTiming(isLoaded ? 1 : 1.3, { duration }),
+            },
+          ],
+        };
+
+      case "zoom-in":
+        return {
+          opacity,
+          transform: [
+            {
+              scale: withTiming(isLoaded ? 1 : 0.7, { duration }),
             },
           ],
         };
@@ -64,22 +75,22 @@ export const useAnimation = (
         return {
           opacity,
           // @ts-ignore - transformOrigin is supported in RN 0.73+ but might be missing in some older TS types
-          transformOrigin: ["0%", "0%"],
+          transformOrigin: ["0%", "0%", 0],
           transform: [
             {
               perspective: 1000,
             },
             {
-              rotateX: withTiming(loaded ? "0deg" : "30deg", { duration }),
+              rotateX: withTiming(isLoaded ? "0deg" : "30deg", { duration }),
             },
             {
-              rotateY: withTiming(loaded ? "0deg" : "-30deg", { duration }),
+              rotateY: withTiming(isLoaded ? "0deg" : "-30deg", { duration }),
             },
             {
-              rotate: withTiming(loaded ? "0deg" : "-15deg", { duration }),
+              rotate: withTiming(isLoaded ? "0deg" : "-15deg", { duration }),
             },
             {
-              scale: withTiming(loaded ? 1 : 0.9, { duration }),
+              scale: withTiming(isLoaded ? 1 : 0.9, { duration }),
             },
           ],
         };

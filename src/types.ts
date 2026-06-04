@@ -7,7 +7,8 @@ export type AnimationType =
   | "slide-left"
   | "slide-right"
   | "fold-out"
-  | "zoom-out";
+  | "zoom-out"
+  | "zoom-in";
 
 export interface SmartImageProps {
   source: ImageSourcePropType;
